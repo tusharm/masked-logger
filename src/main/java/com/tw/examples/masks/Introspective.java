@@ -13,19 +13,24 @@ public class Introspective extends AbstractMask {
 
     @Override
     public String value() {
+        return valueOf(object);
+    }
+
+    private String valueOf(Object object) {
         return object.getClass().isAnnotationPresent(Introspected.class)
-                ? stringify()
+                ? introspect(object)
                 : object.toString();
     }
 
-    private String stringify() {
+    private String introspect(Object object) {
         Objects.ToStringHelper helper = Objects.toStringHelper(object);
 
         Field[] declaredFields = object.getClass().getDeclaredFields();
         for (Field field : declaredFields) {
             try {
-                helper.add(field.getName(), getValue(field));
+                helper.add(field.getName(), getValue(field, object));
             } catch (ReflectiveOperationException e) {
+                // TODO: Needs to be removed
                 e.printStackTrace();
             }
         }
@@ -33,17 +38,19 @@ public class Introspective extends AbstractMask {
         return helper.toString();
     }
 
-    private Object getValue(Field field) throws ReflectiveOperationException {
+    private Object getValue(Field field, Object object) throws ReflectiveOperationException {
         field.setAccessible(true);
 
         return field.isAnnotationPresent(Masked.class)
-                ? getMaskedValue(field)
-                : field.get(object);
+                ? getMaskedValue(field, object)
+                : valueOf(field.get(object));
     }
 
-    private Object getMaskedValue(Field field) throws ReflectiveOperationException {
+    private Object getMaskedValue(Field field, Object object) throws ReflectiveOperationException {
+        Object value = valueOf(field.get(object));
+
         Masked masked = field.getAnnotation(Masked.class);
-        Mask mask = masked.type().getConstructor(Object.class).newInstance(field.get(object));
+        Mask mask = masked.type().getConstructor(Object.class).newInstance(value);
         return mask.value();
     }
 }

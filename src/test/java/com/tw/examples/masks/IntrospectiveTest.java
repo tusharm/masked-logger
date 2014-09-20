@@ -17,7 +17,7 @@ public class IntrospectiveTest {
     public static Object[][] data = new Object[][] {
             {new TestObject(), "I am a test object"},
             {new Simple(), "Simple{id=12, balance=12.5, name=some-name, secured=true}"},
-//            {new SimpleWithNonPrimitiveField(), "SimpleWithNonPrimitiveField{simple=Simple{id=12, balance=12.5, name=some-name, secured=true}}"},
+            {new SimpleWithNonPrimitiveField(), "SimpleWithNonPrimitiveField{text=hello, simple=Simple{id=12, balance=12.5, name=some-name, secured=true}}"},
             {new MaskedPrimitiveField(), "MaskedPrimitiveField{balance=**********, id=2}"}
     };
 
@@ -38,7 +38,8 @@ class Simple {
 
 @Introspected
 class SimpleWithNonPrimitiveField {
-    Simple simple = new Simple();
+    private String text = "hello";
+    private Simple simple = new Simple();
 }
 
 @Introspected
