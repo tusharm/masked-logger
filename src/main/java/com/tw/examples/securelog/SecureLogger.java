@@ -1,6 +1,6 @@
 package com.tw.examples.securelog;
 
-import com.tw.examples.securelog.annotations.Sensitive;
+import com.tw.examples.masks.annotations.Sensitive;
 
 public class SecureLogger {
     private Appender appender;

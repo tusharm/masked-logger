@@ -1,4 +1,4 @@
-package com.tw.examples.securelog.objects;
+package com.tw.examples.masks.objects;
 
 public class TestObject {
     @Override

@@ -1,4 +1,4 @@
-package com.tw.examples.securelog.annotations;
+package com.tw.examples.masks.annotations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

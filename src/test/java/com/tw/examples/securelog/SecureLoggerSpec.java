@@ -1,8 +1,9 @@
 package com.tw.examples.securelog;
 
 import com.tw.examples.securelog.objects.SensitiveObject;
-import com.tw.examples.securelog.objects.TestObject;
+import com.tw.examples.masks.objects.TestObject;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -28,9 +29,16 @@ public class SecureLoggerSpec {
     }
 
     @Test
-    public void shouldObfuscateSensitiveObjects() {
+    public void shouldMaskSensitiveObjects() {
         logger.info(new SensitiveObject());
         verify(appender).append("***");
     }
+
+    @Test
+    @Ignore
+    public void shouldMaskPrimitiveTypes() {
+    }
+
+
 }
 
