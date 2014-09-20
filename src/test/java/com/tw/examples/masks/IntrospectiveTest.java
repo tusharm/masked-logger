@@ -18,7 +18,9 @@ public class IntrospectiveTest {
             {new TestObject(), "I am a test object"},
             {new Simple(), "Simple{id=12, balance=12.5, name=some-name, secured=true}"},
             {new SimpleWithNonPrimitiveField(), "SimpleWithNonPrimitiveField{text=hello, simple=Simple{id=12, balance=12.5, name=some-name, secured=true}}"},
-            {new MaskedPrimitiveField(), "MaskedPrimitiveField{balance=**********, id=2}"}
+            {new MaskedPrimitiveField(), "MaskedPrimitiveField{balance=**********, id=2}"},
+            {new CustomMaskedPrimitiveField(), "CustomMaskedPrimitiveField{name=********blah}"},
+            {new MaskedNonPrimitiveField(), "MaskedNonPrimitiveField{id=2, field1=**********************************************, field2=MaskedPrimitiveField{balance=**********, id=2}}"}
     };
 
     @Theory
@@ -48,5 +50,23 @@ class MaskedPrimitiveField {
     private double balance = 1000000.55;
     private int id = 2;
 }
+
+@Introspected
+class CustomMaskedPrimitiveField {
+    @Masked(type = ShowSuffix.class, args = "4")
+    private String name = "blahblahblah";
+}
+
+@Introspected
+class MaskedNonPrimitiveField {
+    private int id = 2;
+
+    @Masked
+    private MaskedPrimitiveField field1 = new MaskedPrimitiveField();
+
+    private MaskedPrimitiveField field2 = new MaskedPrimitiveField();
+}
+
+
 
 

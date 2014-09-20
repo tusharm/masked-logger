@@ -7,8 +7,13 @@ import com.tw.examples.masks.annotations.Masked;
 import java.lang.reflect.Field;
 
 public class Introspective extends AbstractMask {
-    Introspective(Object object) {
+    public Introspective(Object object) {
         super(object);
+    }
+
+    // Required by @Masked annotation processor
+    public Introspective(Object object, String[] args) {
+        super(object, args);
     }
 
     @Override
@@ -50,7 +55,8 @@ public class Introspective extends AbstractMask {
         Object value = valueOf(field.get(object));
 
         Masked masked = field.getAnnotation(Masked.class);
-        Mask mask = masked.type().getConstructor(Object.class).newInstance(value);
+        String[] args = masked.args();
+        AbstractMask mask = masked.type().getConstructor(Object.class, String[].class).newInstance(value, args);
         return mask.value();
     }
 }
