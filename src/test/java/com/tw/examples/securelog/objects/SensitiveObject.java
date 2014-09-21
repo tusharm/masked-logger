@@ -1,6 +1,6 @@
 package com.tw.examples.securelog.objects;
 
-import com.tw.examples.masks.annotations.Sensitive;
+import com.tw.examples.securelog.Sensitive;
 
 @Sensitive
 public class SensitiveObject {

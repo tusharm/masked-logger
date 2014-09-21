@@ -1,4 +1,4 @@
-package com.tw.examples.masks;
+package com.tw.examples.appender.masks;
 
 public class Transparent extends AbstractMask {
     public Transparent(Object object) {

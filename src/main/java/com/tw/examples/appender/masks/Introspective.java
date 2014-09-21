@@ -1,8 +1,8 @@
-package com.tw.examples.masks;
+package com.tw.examples.appender.masks;
 
 import com.google.common.base.Objects;
-import com.tw.examples.masks.annotations.Introspected;
-import com.tw.examples.masks.annotations.Masked;
+import com.tw.examples.appender.masks.annotations.Introspected;
+import com.tw.examples.appender.masks.annotations.Masked;
 
 import java.lang.reflect.Field;
 
@@ -34,10 +34,7 @@ public class Introspective extends AbstractMask {
         for (Field field : declaredFields) {
             try {
                 helper.add(field.getName(), getValue(field, object));
-            } catch (ReflectiveOperationException e) {
-                // TODO: Needs to be removed
-                e.printStackTrace();
-            }
+            } catch (ReflectiveOperationException e) {}
         }
 
         return helper.toString();

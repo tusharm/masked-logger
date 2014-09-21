@@ -1,16 +1,12 @@
-package com.tw.examples.masks.annotations;
+package com.tw.examples.appender.masks.annotations;
 
-import com.tw.examples.masks.AbstractMask;
-import com.tw.examples.masks.HideAll;
-import com.tw.examples.masks.Mask;
+import com.tw.examples.appender.masks.AbstractMask;
+import com.tw.examples.appender.masks.HideAll;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})

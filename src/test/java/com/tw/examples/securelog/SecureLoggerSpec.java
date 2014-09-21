@@ -1,7 +1,7 @@
 package com.tw.examples.securelog;
 
 import com.tw.examples.securelog.objects.SensitiveObject;
-import com.tw.examples.masks.objects.TestObject;
+import com.tw.examples.appender.masks.objects.TestObject;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

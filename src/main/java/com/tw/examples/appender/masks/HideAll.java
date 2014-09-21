@@ -1,4 +1,4 @@
-package com.tw.examples.masks;
+package com.tw.examples.appender.masks;
 
 import static org.apache.commons.lang.StringUtils.repeat;
 

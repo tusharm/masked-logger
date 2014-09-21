@@ -1,8 +1,6 @@
-package com.tw.examples.masks;
+package com.tw.examples.appender.masks;
 
-import com.tw.examples.masks.annotations.Introspected;
-import com.tw.examples.masks.annotations.Masked;
-import com.tw.examples.masks.objects.TestObject;
+import com.tw.examples.appender.masks.objects.*;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
@@ -28,43 +26,6 @@ public class IntrospectiveTest {
         Introspective mask = new Introspective(data[0]);
         assertThat(mask.value(), is(data[1]));
     }
-}
-
-@Introspected
-class Simple {
-    private int id = 12;
-    Double balance = 12.50;
-    public String name = "some-name";
-    protected boolean secured = true;
-}
-
-@Introspected
-class SimpleWithNonPrimitiveField {
-    private String text = "hello";
-    private Simple simple = new Simple();
-}
-
-@Introspected
-class MaskedPrimitiveField {
-    @Masked
-    private double balance = 1000000.55;
-    private int id = 2;
-}
-
-@Introspected
-class CustomMaskedPrimitiveField {
-    @Masked(type = ShowSuffix.class, args = "4")
-    private String name = "blahblahblah";
-}
-
-@Introspected
-class MaskedNonPrimitiveField {
-    private int id = 2;
-
-    @Masked
-    private MaskedPrimitiveField field1 = new MaskedPrimitiveField();
-
-    private MaskedPrimitiveField field2 = new MaskedPrimitiveField();
 }
 
 

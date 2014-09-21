@@ -1,4 +1,4 @@
-package com.tw.examples.masks.objects;
+package com.tw.examples.appender.masks.objects;
 
 public class TestObject {
     @Override

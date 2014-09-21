@@ -1,4 +1,4 @@
-package com.tw.examples.masks;
+package com.tw.examples.appender.masks;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

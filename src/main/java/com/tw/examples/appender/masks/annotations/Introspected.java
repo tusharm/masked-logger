@@ -1,4 +1,4 @@
-package com.tw.examples.masks.annotations;
+package com.tw.examples.appender.masks.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
