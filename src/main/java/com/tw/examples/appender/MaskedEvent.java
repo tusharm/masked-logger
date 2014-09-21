@@ -54,17 +54,13 @@ public class MaskedEvent implements ILoggingEvent {
 
     @Override
     public String getFormattedMessage() {
-        if (formattedMessage != null) {
+        if (formattedMessage != null)
             return formattedMessage;
-        }
 
         Object[] argumentArray = getArgumentArray();
-        if (argumentArray != null) {
-            formattedMessage = MessageFormatter.arrayFormat(getMessage(), argumentArray)
-                    .getMessage();
-        } else {
-            formattedMessage = getMessage();
-        }
+        formattedMessage = (argumentArray != null)
+                ? MessageFormatter.arrayFormat(getMessage(), argumentArray).getMessage()
+                : getMessage();
 
         return formattedMessage;
     }
