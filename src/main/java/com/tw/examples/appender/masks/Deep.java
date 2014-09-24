@@ -1,18 +1,18 @@
 package com.tw.examples.appender.masks;
 
 import com.google.common.base.Objects;
-import com.tw.examples.appender.masks.annotations.Introspected;
+import com.tw.examples.appender.masks.annotations.DeepMask;
 import com.tw.examples.appender.masks.annotations.Masked;
 
 import java.lang.reflect.Field;
 
-public class Introspective extends AbstractMask {
-    public Introspective(Object object) {
+public class Deep extends AbstractMask {
+    public Deep(Object object) {
         super(object);
     }
 
     // Required by @Masked annotation processor
-    public Introspective(Object object, String[] args) {
+    public Deep(Object object, String[] args) {
         super(object, args);
     }
 
@@ -22,7 +22,7 @@ public class Introspective extends AbstractMask {
     }
 
     private String valueOf(Object object) {
-        return object.getClass().isAnnotationPresent(Introspected.class)
+        return object.getClass().isAnnotationPresent(DeepMask.class)
                 ? introspect(object)
                 : object.toString();
     }

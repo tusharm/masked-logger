@@ -1,8 +1,8 @@
 package com.tw.examples.appender.masks.objects;
 
-import com.tw.examples.appender.masks.annotations.Introspected;
+import com.tw.examples.appender.masks.annotations.DeepMask;
 
-@Introspected
+@DeepMask
 public class Simple {
     private int id = 12;
     Double balance = 12.50;

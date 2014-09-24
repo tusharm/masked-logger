@@ -1,9 +1,9 @@
 package com.tw.examples.appender.masks.objects;
 
-import com.tw.examples.appender.masks.annotations.Introspected;
+import com.tw.examples.appender.masks.annotations.DeepMask;
 import com.tw.examples.appender.masks.annotations.Masked;
 
-@Introspected
+@DeepMask
 public class MaskedNonPrimitiveField {
     private int id = 2;
 
