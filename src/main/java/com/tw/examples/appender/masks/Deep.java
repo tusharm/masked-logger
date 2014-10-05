@@ -32,12 +32,12 @@ public class Deep extends AbstractMask {
 
     private String valueOf(Object object) {
         // if the object has already been masked, don't mask it again
-        if(maskedObjectsMap.contains(object.hashCode())) {
+        if(maskedObjectsMap.contains(object)) {
             return "";
         }
 
         if(isUserDefinedObject(object.getClass())) {
-            maskedObjectsMap.add(object.hashCode());
+            maskedObjectsMap.add(object);
         }
 
         return object.getClass().isAnnotationPresent(DeepMask.class)
