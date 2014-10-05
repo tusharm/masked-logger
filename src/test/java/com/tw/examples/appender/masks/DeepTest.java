@@ -1,10 +1,12 @@
 package com.tw.examples.appender.masks;
 
 import com.tw.examples.appender.masks.objects.*;
+import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
+import org.mockito.internal.util.Primitives;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,6 +27,18 @@ public class DeepTest {
     public void shouldReturnMaskedValue(Object[] data) {
         Deep mask = new Deep(data[0]);
         assertThat(mask.value(), is(data[1]));
+    }
+
+    @Test
+    public void shouldNotLoopInfinitelyForCyclicReferences() {
+        CyclicReferenceObject1 cyclicReferenceObject1 = new CyclicReferenceObject1();
+        CyclicReferenceObject2 cyclicReferenceObject2 = new CyclicReferenceObject2();
+
+        cyclicReferenceObject1.cyclicReferenceObject2 = cyclicReferenceObject2;
+        cyclicReferenceObject2.cyclicReferenceObject1 = cyclicReferenceObject1;
+
+        Deep mask = new Deep(cyclicReferenceObject1);
+        assertThat(mask.value(), is("CyclicReferenceObject1{intValue=1, strValue=*oo!, cyclicReferenceObject2=CyclicReferenceObject2{intValue=1, strValue=*oo!, cyclicReferenceObject1=}}"));
     }
 }
 
