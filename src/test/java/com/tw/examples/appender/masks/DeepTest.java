@@ -33,12 +33,23 @@ public class DeepTest {
     public void shouldNotLoopInfinitelyForCyclicReferences() {
         CyclicReferenceObject1 cyclicReferenceObject1 = new CyclicReferenceObject1();
         CyclicReferenceObject2 cyclicReferenceObject2 = new CyclicReferenceObject2();
-
         cyclicReferenceObject1.cyclicReferenceObject2 = cyclicReferenceObject2;
         cyclicReferenceObject2.cyclicReferenceObject1 = cyclicReferenceObject1;
+        String expectedMaskedValue = "CyclicReferenceObject1{intValue=1, strValue=*oo!, cyclicReferenceObject2=CyclicReferenceObject2{intValue=1, strValue=*oo!, cyclicReferenceObject1=}}";
 
         Deep mask = new Deep(cyclicReferenceObject1);
-        assertThat(mask.value(), is("CyclicReferenceObject1{intValue=1, strValue=*oo!, cyclicReferenceObject2=CyclicReferenceObject2{intValue=1, strValue=*oo!, cyclicReferenceObject1=}}"));
+
+        assertThat(mask.value(), is(expectedMaskedValue));
+    }
+
+    @Test
+    public void shouldNotLogFieldsWithIgnoreAnnotation() {
+        ClassWithIgnoreAnnotations classWithIgnoreAnnotations = new ClassWithIgnoreAnnotations();
+        String expectedMaskedValue = "ClassWithIgnoreAnnotations{str=foobar}";
+
+        Deep mask = new Deep(classWithIgnoreAnnotations);
+
+        assertThat(mask.value(), is(expectedMaskedValue));
     }
 }
 

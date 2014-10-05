@@ -3,6 +3,7 @@ package com.tw.examples.appender.masks;
 import com.google.common.base.Objects;
 import com.google.common.primitives.Primitives;
 import com.tw.examples.appender.masks.annotations.DeepMask;
+import com.tw.examples.appender.masks.annotations.IgnoreInLog;
 import com.tw.examples.appender.masks.annotations.Masked;
 
 import java.lang.reflect.Field;
@@ -51,7 +52,9 @@ public class Deep extends AbstractMask {
         Field[] declaredFields = object.getClass().getDeclaredFields();
         for (Field field : declaredFields) {
             try {
-                helper.add(field.getName(), getValue(field, object));
+                if(!field.isAnnotationPresent(IgnoreInLog.class)) {
+                    helper.add(field.getName(), getValue(field, object));
+                }
             } catch (ReflectiveOperationException e) {}
         }
 
