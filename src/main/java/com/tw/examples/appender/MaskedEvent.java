@@ -5,12 +5,14 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.IThrowableProxy;
 import ch.qos.logback.classic.spi.LoggerContextVO;
 import com.tw.examples.appender.masks.Mask;
+import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Marker;
 import org.slf4j.helpers.MessageFormatter;
 
 import java.util.Map;
 
 import static java.lang.String.format;
+import static org.apache.commons.lang.ArrayUtils.isEmpty;
 
 public class MaskedEvent implements ILoggingEvent {
     private ILoggingEvent baseEvent;
@@ -38,6 +40,9 @@ public class MaskedEvent implements ILoggingEvent {
     @Override
     public Object[] getArgumentArray() {
         Object[] originalArray = baseEvent.getArgumentArray();
+        if (isEmpty(originalArray))
+            return originalArray;
+
         String[] maskedArguments = new String[originalArray.length];
 
         for (int i = 0; i < originalArray.length; i++) {
